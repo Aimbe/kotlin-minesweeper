@@ -4,17 +4,10 @@ class Board private constructor(
     private val size: BoardSize,
     private val mines: Mines,
 ) {
-    fun display(): String {
-        return buildString {
-            for (row in 0 until size.rows) {
-                for (col in 0 until size.columns) {
-                    if (col > 0) append(" ")
-                    append(if (mines.contains(Position(row, col))) "*" else "C")
-                }
-                if (row < size.rows - 1) append("\n")
-            }
-        }
-    }
+    val boardSize: BoardSize
+        get() = size
+    val minePositions: Mines
+        get() = mines
 
     companion object {
         fun create(
