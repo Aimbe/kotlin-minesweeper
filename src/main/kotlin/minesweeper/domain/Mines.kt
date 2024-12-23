@@ -1,10 +1,10 @@
 package minesweeper.domain
 
 class Mines private constructor(
-    private val positions: Set<Position>,
+    private val positions: MinePositions,
 ) {
     fun contains(position: Position): Boolean = positions.contains(position)
-
+    fun mineCount(): Int = positions.size()
     companion object {
         fun create(
             boardSize: BoardSize,
@@ -17,12 +17,12 @@ class Mines private constructor(
         private fun generateMinePositions(
             boardSize: BoardSize,
             mineCount: MineCount,
-        ): Set<Position> {
+        ): MinePositions {
             val positions = mutableSetOf<Position>()
             while (positions.size < mineCount.count()) {
                 positions.add(Position.random(boardSize))
             }
-            return positions
+            return MinePositions.from(positions)
         }
     }
 }
