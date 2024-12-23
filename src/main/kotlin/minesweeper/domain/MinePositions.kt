@@ -1,7 +1,7 @@
 package minesweeper.domain
 
 class MinePositions private constructor(
-    private val values: Set<Position>
+    private val values: Set<Position>,
 ) {
     fun contains(position: Position): Boolean = values.contains(position)
 

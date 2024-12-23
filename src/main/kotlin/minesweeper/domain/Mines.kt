@@ -4,7 +4,9 @@ class Mines private constructor(
     private val positions: MinePositions,
 ) {
     fun contains(position: Position): Boolean = positions.contains(position)
+
     fun mineCount(): Int = positions.size()
+
     companion object {
         fun create(
             boardSize: BoardSize,
