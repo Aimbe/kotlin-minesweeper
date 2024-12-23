@@ -10,9 +10,10 @@ class MinesTest : StringSpec({
         val mineCount = MineCount(5)
         val mines = Mines.create(boardSize, mineCount)
 
-        val positions = mines::class.java.getDeclaredField("positions").apply {
-            isAccessible = true
-        }.get(mines) as Set<*>
+        val positions =
+            mines::class.java.getDeclaredField("positions").apply {
+                isAccessible = true
+            }.get(mines) as Set<*>
 
         positions.size shouldBe 5
     }
@@ -21,9 +22,10 @@ class MinesTest : StringSpec({
         val mineCount = MineCount(10)
         val mines = Mines.create(boardSize, mineCount)
 
-        val positions = mines::class.java.getDeclaredField("positions").apply {
-            isAccessible = true
-        }.get(mines) as Set<*>
+        val positions =
+            mines::class.java.getDeclaredField("positions").apply {
+                isAccessible = true
+            }.get(mines) as Set<*>
 
         positions.size shouldBe 10
     }
