@@ -5,13 +5,20 @@ import io.kotest.matchers.shouldBe
 
 class BoardDisplayFactoryTest : StringSpec({
 
-    "디스플레이 결과를 표출한다." {
+    "디스플레이 결과를 랜덤한 보드를 생성한다." {
 
         val boardSize = BoardSize(3, 3)
-        val minePositions = setOf(Position(0, 0), Position(1, 1))
-        val expectedDisplay = "* C C\nC * C\nC C C"
-        val board = Board.create(boardSize.rows, boardSize.columns, minePositions.size)
+        val mineCount = 2
+        val board = Board.create(boardSize.rows, boardSize.columns, mineCount)
         val actualDisplay = BoardDisplayFactory.present(board)
-        actualDisplay shouldBe expectedDisplay
+
+        val rows = actualDisplay.split("\n")
+        rows.size shouldBe boardSize.rows
+        rows.forEach { row ->
+            row.split(" ").size shouldBe boardSize.columns
+        }
+
+        val mineCountInDisplay = actualDisplay.count { it == '*' }
+        mineCountInDisplay shouldBe mineCount
     }
 })
