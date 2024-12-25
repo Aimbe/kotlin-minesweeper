@@ -10,7 +10,10 @@ object BoardDisplayFactory {
         }
     }
 
-    private fun StringBuilder.appendRow(board: Board, row: Int) {
+    private fun StringBuilder.appendRow(
+        board: Board,
+        row: Int,
+    ) {
         for (col in 0 until board.size.columns) {
             if (col > 0) append(" ")
             append(cellRepresentation(board, Position(row, col)))

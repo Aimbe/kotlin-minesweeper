@@ -1,6 +1,5 @@
 package minesweeper.domain
 
-
 @JvmInline
 value class MineCount(val count: Int) {
     init {

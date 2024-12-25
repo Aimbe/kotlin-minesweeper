@@ -33,6 +33,5 @@ class Mines private constructor(
                 }
             }
         }
-
     }
 }
