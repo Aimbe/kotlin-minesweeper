@@ -17,6 +17,6 @@ object BoardDisplayFactory {
         board: Board,
         position: Position,
     ): String {
-        return if (board.minePositions.contains(position)) "*" else "C"
+        return if (board.minePositions in (position)) "*" else "C"
     }
 }

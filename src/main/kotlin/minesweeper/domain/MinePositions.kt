@@ -3,9 +3,10 @@ package minesweeper.domain
 class MinePositions private constructor(
     private val values: Set<Position>,
 ) {
-    fun contains(position: Position): Boolean = values.contains(position)
+    operator fun contains(position: Position): Boolean = position in values
 
-    fun size(): Int = values.size
+    val size: Int
+        get() = values.size
 
     companion object {
         fun from(positions: Set<Position>): MinePositions {
