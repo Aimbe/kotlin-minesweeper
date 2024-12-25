@@ -3,9 +3,9 @@ package minesweeper.domain
 class Mines private constructor(
     private val positions: MinePositions,
 ) {
-    fun contains(position: Position): Boolean = positions.contains(position)
+    operator fun contains(position: Position): Boolean = positions.contains(position)
 
-    fun mineCount(): Int = positions.size()
+    fun mineCount(): Int = positions.size
 
     companion object {
         fun create(
@@ -20,11 +20,19 @@ class Mines private constructor(
             boardSize: BoardSize,
             mineCount: MineCount,
         ): MinePositions {
-            val positions = mutableSetOf<Position>()
-            while (positions.size < mineCount.count) {
-                positions.add(Position.random(boardSize))
-            }
-            return MinePositions.from(positions)
+            val allPositions = generateAllPositions(boardSize)
+
+            val selectedPositions = allPositions.shuffled().take(mineCount.count)
+            return MinePositions.from(selectedPositions.toSet())
         }
+
+        private fun generateAllPositions(boardSize: BoardSize): List<Position> {
+            return (0 until boardSize.rows).flatMap { row ->
+                (0 until boardSize.columns).map { col ->
+                    Position(row, col)
+                }
+            }
+        }
+
     }
 }
