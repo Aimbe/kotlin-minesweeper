@@ -1,14 +1,9 @@
 package minesweeper.domain
 
 class Board private constructor(
-    private val size: BoardSize,
-    private val mines: Mines,
+    val size: BoardSize,
+    val mines: Mines,
 ) {
-    val boardSize: BoardSize
-        get() = size
-    val minePositions: Mines
-        get() = mines
-
     companion object {
         fun create(
             rows: Int,
