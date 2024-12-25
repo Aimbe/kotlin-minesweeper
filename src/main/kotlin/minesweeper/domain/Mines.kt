@@ -21,7 +21,7 @@ class Mines private constructor(
             mineCount: MineCount,
         ): MinePositions {
             val positions = mutableSetOf<Position>()
-            while (positions.size < mineCount.count()) {
+            while (positions.size < mineCount.count) {
                 positions.add(Position.random(boardSize))
             }
             return MinePositions.from(positions)
