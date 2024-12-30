@@ -1,7 +1,10 @@
-package minesweeper.domain
+import minesweeper.domain.BoardSize
+import minesweeper.domain.MineCount
+import minesweeper.domain.MinePositions
+import minesweeper.domain.Position
 
 class Mines private constructor(
-    private val positions: MinePositions,
+    val positions: MinePositions,
 ) {
     operator fun contains(position: Position): Boolean = positions.contains(position)
 
@@ -13,17 +16,15 @@ class Mines private constructor(
             mineCount: MineCount,
         ): Mines {
             val positions = generateMinePositions(boardSize, mineCount)
-            return Mines(positions)
+            return Mines(MinePositions.from(positions))
         }
 
         private fun generateMinePositions(
             boardSize: BoardSize,
             mineCount: MineCount,
-        ): MinePositions {
+        ): Set<Position> {
             val allPositions = generateAllPositions(boardSize)
-
-            val selectedPositions = allPositions.shuffled().take(mineCount.count)
-            return MinePositions.from(selectedPositions.toSet())
+            return allPositions.shuffled().take(mineCount.count).toSet()
         }
 
         private fun generateAllPositions(boardSize: BoardSize): List<Position> {

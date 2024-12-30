@@ -10,20 +10,18 @@ object BoardDisplayFactory {
         }
     }
 
-    private fun StringBuilder.appendRow(
-        board: Board,
-        row: Int,
-    ) {
+    private fun StringBuilder.appendRow(board: Board, row: Int) {
         for (col in 0 until board.size.columns) {
             if (col > 0) append(" ")
-            append(cellRepresentation(board, Position(row, col)))
+            append(cellRepresentation(board.getCell(Position(row, col))))
         }
     }
 
-    private fun cellRepresentation(
-        board: Board,
-        position: Position,
-    ): String {
-        return if (position in board.mines) "*" else "C"
+    private fun cellRepresentation(cell: Cell?): String {
+        return when (cell) {
+            is Cell.Mine -> "*"
+            is Cell.Empty -> cell.adjacentMines.toString()
+            else -> " "
+        }
     }
 }
